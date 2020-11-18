@@ -1,12 +1,16 @@
 from setuptools import setup
 
+with open("requirements.txt") as f:
+    install_requires = f.readlines()
+
 setup(
-    name = "monty_hall_game",
-    version = "0.0.1",
-    author = "Simon Funke",
-    author_email = "simon@simula.no",
-    description = ("A game implementation of the Monty Hall problem."),
-    license = "BSD",
-    packages=['monty_hall_game'],
-    scripts=['bin/play_monty_hall_cli.py', 'bin/play_monty_hall_web.py'],
+    name="uio-monty-hall-game",
+    version="2020.11.0",
+    author="Simon Funke",
+    author_email="simon@simula.no",
+    description=("A game implementation of the Monty Hall problem."),
+    license="BSD",
+    packages=["monty_hall_game"],
+    install_requires=install_requires,
+    scripts=["bin/play_monty_hall_cli.py", "bin/play_monty_hall_web.py"],
 )
