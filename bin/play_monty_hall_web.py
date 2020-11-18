@@ -53,7 +53,7 @@ def final():
     
     has_won = game.open_door()
 
-    return render_template("final.html", has_won=has_won)
+    return render_template("final.html", has_won=has_won, winning=game.winning_door())
 
 @app.route('/statistics') 
 def statistics():           

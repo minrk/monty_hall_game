@@ -58,6 +58,8 @@ class MontyHallGame(object):
         self.opened_door = None
         self.reselected_door = None
 
+    def winning_door(self):
+        return self.__winning_door
 
     def select_door(self, door):
         """ Use this function to let the play select a door. This function
