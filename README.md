@@ -1,7 +1,7 @@
 Monty Hall Game
 ===============
 
-This repository contains a simple implemenation of the Monty Hall Game with 
+This repository contains a simple implementation of the Monty Hall Game with 
 a command line and web interface.
 
 
