@@ -40,7 +40,6 @@ class MontyHallGame(object):
 
         return "{}\n{}".format(s1, s2)
 
-
     def __init__(self):
         self.game_id = str(uuid.uuid4())
 
@@ -65,7 +64,9 @@ class MontyHallGame(object):
         """
 
         if not 1 <= door <= 3:
-            raise InvalidGameInput("Door must be an integer between 1 and 3, you provided {}.".format(door))
+            raise InvalidGameInput(
+                "Door must be an integer between 1 and 3, you provided {}.".format(door)
+            )
 
         if door == self.opened_door:
             raise InvalidGameInput("Cannot select opened door")
@@ -74,7 +75,6 @@ class MontyHallGame(object):
             self.selected_door = door
         else:
             self.reselected_door = door
-
 
     def available_doors(self):
         """Returns a list of doors that are still available for selection"""
@@ -107,7 +107,9 @@ class MontyHallGame(object):
         :returns: `True` if the player has won, `False` otherwise."""
 
         if self.reselected_door is None or self.opened_door is None:
-            raise InvalidGameInput("You must select a door after letting the host open a door.")
+            raise InvalidGameInput(
+                "You must select a door after letting the host open a door."
+            )
 
         changed = self.selected_door != self.reselected_door
         game_won = self.reselected_door == self.__winning_door
@@ -125,6 +127,7 @@ class MontyHallGame(object):
                 MontyHallGame.stats["not_changed"]["lost"] += 1
 
         return game_won
+
 
 if __name__ == "__main__":
     game = MontyHallGame()
