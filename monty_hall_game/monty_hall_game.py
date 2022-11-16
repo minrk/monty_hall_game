@@ -1,51 +1,42 @@
-import uuid 
+import uuid
 import random
 from .game_exceptions import InvalidGameInput
 
 
 class MontyHallGame(object):
-    """ Instantiates a new Monty Hall Game object.
+    """Instantiates a new Monty Hall Game object.
 
-    Example usage:
+    Example usage::
 
-    ```
-    game = MontyHallGame()
+        game = MontyHallGame()
 
-    game.select_door(1)
-    game.let_host_open_door()
+        game.select_door(1)
+        game.let_host_open_door()
 
-    to_open = random.choice(game.available_doors())
-    game.select_door(to_open)
+        to_open = random.choice(game.available_doors())
+        game.select_door(to_open)
 
-    won = game.open_door()
-    ```
-
+        won = game.open_door()
     """
 
-
-    stats = {
-             "changed":     {"won": 0, "lost": 0},
-             "not_changed": {"won": 0, "lost": 0}
-            }
+    stats = {"changed": {"won": 0, "lost": 0}, "not_changed": {"won": 0, "lost": 0}}
 
     @staticmethod
     def statistics():
-        """ Returns statistics about the winning chances of the "change door" 
-        and "do not change door" strategies of all games played. """
-
+        """Returns statistics about the winning chances of the "change door"
+        and "do not change door" strategies of all games played."""
 
         # Get statistics class variable
         stats = MontyHallGame.stats
 
         s1 = "Changed and won: {} out of {}".format(
-                stats["changed"]["won"], 
-                stats["changed"]["won"] + stats["changed"]["lost"]
-                )
+            stats["changed"]["won"], stats["changed"]["won"] + stats["changed"]["lost"]
+        )
 
         s2 = "Not changed and won: {} out of {}".format(
-                stats["not_changed"]["won"], 
-                stats["not_changed"]["won"] + stats["not_changed"]["lost"]
-                )
+            stats["not_changed"]["won"],
+            stats["not_changed"]["won"] + stats["not_changed"]["lost"],
+        )
 
         return "{}\n{}".format(s1, s2)
 
@@ -62,11 +53,15 @@ class MontyHallGame(object):
         return self.__winning_door
 
     def select_door(self, door):
-        """ Use this function to let the play select a door. This function
+        """Use this function to let the play select a door. This function
+
         should be called twice: Once at the beginning of the game for the initial
-        door choice. And once after calling :function:`MontyHallGame.let_host_open_door`.
-        
-        :ivar door: The door to be selected. Valid values: [1, 2, 3]
+        door choice. And once after calling :meth:`MontyHallGame.let_host_open_door`.
+
+        Arguments:
+
+            door (int):
+                The door to be selected. Valid values: [1, 2, 3]
         """
 
         if not 1 <= door <= 3:
@@ -82,18 +77,16 @@ class MontyHallGame(object):
 
 
     def available_doors(self):
-        """ Returns a list of doors that are still available for selection """
-
+        """Returns a list of doors that are still available for selection"""
 
         a = set([1, 2, 3])
-        a.discard(self.opened_door) 
+        a.discard(self.opened_door)
         return list(a)
 
-
     def let_host_open_door(self):
-        """ When this function is called, the host will open a door that contains no price.
+        """When this function is called, the host will open a door that contains no price.
 
-        :returns: The newly opened door number as an int. """
+        :returns: The newly opened door number as an int."""
 
         if self.selected_door is None:
             raise InvalidGameInput("You must first select a door")
@@ -108,11 +101,10 @@ class MontyHallGame(object):
 
         return self.opened_door
 
-
     def open_door(self):
-        """ Opens the door selected by the player 
+        """Opens the door selected by the player
 
-        :returns: `True` if the player has won, `False` otherwise. """
+        :returns: `True` if the player has won, `False` otherwise."""
 
         if self.reselected_door is None or self.opened_door is None:
             raise InvalidGameInput("You must select a door after letting the host open a door.")

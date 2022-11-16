@@ -30,9 +30,10 @@
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.viewcode',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.doctest",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -89,7 +90,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
 #
-# default_role = None
+default_role = "literal"
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
 #

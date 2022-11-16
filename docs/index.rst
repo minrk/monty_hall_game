@@ -16,7 +16,10 @@ From Wikipedia:
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 3
+
+    modules.rst
+
 
 
 Installation
@@ -26,7 +29,6 @@ Install the game with
 
 .. code-block:: bash
 
-    pip install -r requirements.txt
     pip install .
 
 Starting the game
@@ -36,13 +38,13 @@ Start a command line version of the game with
 
 .. code-block:: bash
 
-    play_monty_hall_cli.py
+    monty-hall-cli
 
 Start a web version of the game with
 
 .. code-block:: bash
 
-    play_monty_hall_web.py
+    monty-hall-web
 
 Indices and tables
 ==================
@@ -50,4 +52,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
