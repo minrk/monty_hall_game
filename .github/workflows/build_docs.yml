@@ -1,32 +1,29 @@
 # This is a GitHub workflow defining a set of jobs with a set of steps.
 # ref: https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions
 #
-name: Tests
+name: Build documentation
 
 on:
-  pull_request:
-  push:
-
+    workflow_dispatch:
+    workflow_call:
+    pull_request:
+        branches:
+            - main 
 jobs:
-  test:
+  build_docs:
     runs-on: ubuntu-22.04
-
-    strategy:
-      matrix:
-        python:
-          - "3.8"
-          - "3.9"
-          - "3.10"
+    env:
+        PYTHON_VERSION: "3.10"
 
     steps:
       # checkout the repository
       - uses: actions/checkout@v4
 
       # setup Python
-      - name: Install Python ${{ matrix.python }}
+      - name: Install Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python }}
+          python-version: ${{ env.PYTHON_VERSION }}
 
       # preserve pip cache to speed up installation
       - name: Cache pip
@@ -44,6 +41,15 @@ jobs:
           python -m pip install --upgrade .[dev]
           python -m pip freeze
 
-      - name: Run tests
+      - name: Build documentation
         run: |
-          python3 -m pytest -v --color=yes
+          cd docs
+          make html
+
+      - name: Upload documentation artifact
+        uses: actions/upload-artifact@v3
+        with:
+            name: documentation
+            path: ./docs/_build/html
+            if-no-files-found: error
+    
